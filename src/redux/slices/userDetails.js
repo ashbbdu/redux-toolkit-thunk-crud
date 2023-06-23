@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const create = createAsyncThunk("create" , async (payload) => {
+export const create = createAsyncThunk("create" , async (payload , {dispatch}) => {
     try {
         const response = await fetch("https://64920a4a2f2c7ee6c2c9559f.mockapi.io/crud" , {
             headers: {
@@ -11,7 +11,11 @@ export const create = createAsyncThunk("create" , async (payload) => {
               body: JSON.stringify(payload)
         })
         const data = await response.json()
+        if(response.status === 201){
+            dispatch(read())
+        }
         return data;
+        
     }
     catch (e) {
         console.log(e)
@@ -55,7 +59,7 @@ export const readById  = createAsyncThunk("readById" , async (id) => {
 })
 
 
-export const update = createAsyncThunk("create" , async (respData) => {
+export const update = createAsyncThunk("create" , async (respData,{dispatch}) => {
     const {formData , id} = respData
     try {
         const response = await fetch(`https://64920a4a2f2c7ee6c2c9559f.mockapi.io/crud/${id }` , {
@@ -67,6 +71,9 @@ export const update = createAsyncThunk("create" , async (respData) => {
               body: JSON.stringify(formData)
         })
         const data = await response.json()
+        if(response.status === 200){
+            dispatch(read())
+        }
         return data;
     }
     catch (e) {

@@ -18,11 +18,19 @@ const Update = () => {
     const { userDetail , loading } = useSelector((state) => state.user);
 console.log(userDetail , "dg")
   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    age: "",
+    gender: "",
+  });
+  useEffect(() => {
+setFormData({
     name: userDetail.name,
     email: userDetail.email,
     age: userDetail.age,
     gender: userDetail.gender,
-  });
+})
+  },[userDetail])
 
 
   const navigate = useNavigate()
@@ -54,7 +62,7 @@ console.log(userDetail , "dg")
           type="text"
           class="form-control"
           name="name"
-          value={userDetail.name}
+          value={formData.name}
           onChange={onChangeHandler}
         />
       </div>
@@ -68,7 +76,7 @@ console.log(userDetail , "dg")
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           name="email"
-          value={userDetail.email}
+          value={formData.email}
           onChange={onChangeHandler}
         />
       </div>
@@ -80,7 +88,7 @@ console.log(userDetail , "dg")
           type="number"
           class="form-control"
           name="age"
-          value={userDetail.age}
+          value={formData.age}
           onChange={onChangeHandler}
         />
       </div>

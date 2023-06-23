@@ -15,7 +15,9 @@ const [selectedId , setSelectedId] = useState(null)
   console.log(users , "users")
   const dispatch = useDispatch();
   useEffect(() => {
+   if(users.length <= 0 ){
     dispatch(read());
+   }
   }, []);
 
   const navigate = useNavigate()
